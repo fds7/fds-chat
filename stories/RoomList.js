@@ -110,4 +110,9 @@ storiesOf('RoomList', module)
       onNextClick={action('onNextClick')}
       rooms={longRooms}
     />
+  ))
+  .add('loading', () => (
+    <RoomList
+      loading
+    />
   ));

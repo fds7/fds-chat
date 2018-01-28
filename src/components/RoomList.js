@@ -4,14 +4,21 @@ import {
   List,
   Container,
   Button,
+  Dimmer,
+  Loader,
 } from 'semantic-ui-react';
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import ko from 'date-fns/locale/ko';
+
+const MinHeightContainer = styled(Container)`
+  min-height: 200px;
+`;
 
 export default class RoomList extends Component {
   render() {
     const {
       rooms = [],
+      loading,
       hasPrev,
       hasNext,
       onPrevClick,
@@ -22,9 +29,14 @@ export default class RoomList extends Component {
       locale: ko
     }
     return (
-      <Container>
+      <Dimmer.Dimmable as={MinHeightContainer} dimmed={loading}>
+        <Dimmer active={loading} inverted>
+          <Loader />
+        </Dimmer>
         {
-          rooms.length > 0
+          loading
+          ? null
+          : rooms.length > 0
           ? <React.Fragment>
               <List divided relaxed>
                 {
@@ -50,7 +62,7 @@ export default class RoomList extends Component {
             </React.Fragment>
           : '채팅방이 없습니다.'
         }
-      </Container>
+      </Dimmer.Dimmable>
     )
   }
 }
