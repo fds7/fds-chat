@@ -5,7 +5,7 @@ export default class TopMenu extends Component {
   render() {
     const {logoItemProps = {}, accountItemProps = {}} = this.props;
     return (
-      <Menu fixed="top">
+      <Menu attached="bottom">
         <Menu.Item header {...logoItemProps}>
           <Icon name="send" color="teal" size="large" />
           Chat!
