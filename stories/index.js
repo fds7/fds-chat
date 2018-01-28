@@ -8,3 +8,4 @@ import './NickNameForm';
 import './ProfilePhotoForm';
 import './MessageList';
 import './MessageForm';
+import './NewRoomModal';
