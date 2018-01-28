@@ -6,3 +6,4 @@ import './RoomList';
 import './AccountScreenLayout';
 import './NickNameForm';
 import './ProfilePhotoForm';
+import './MessageList';

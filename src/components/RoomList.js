@@ -10,6 +10,11 @@ import {
 import distanceInWordsToNow from 'date-fns/distance_in_words_to_now';
 import ko from 'date-fns/locale/ko';
 
+const distOpt = {
+  addSuffix: true,
+  locale: ko
+};
+
 const MinHeightContainer = styled(Container)`
   min-height: 200px;
 `;
@@ -24,10 +29,7 @@ export default class RoomList extends Component {
       onPrevClick,
       onNextClick,
     } = this.props;
-    const distOpt = {
-      addSuffix: true,
-      locale: ko
-    }
+
     return (
       <Dimmer.Dimmable as={MinHeightContainer} dimmed={loading}>
         <Dimmer active={loading} inverted>
