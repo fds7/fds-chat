@@ -16,4 +16,13 @@ storiesOf('LoginScreen', module)
       onGoogleLogin={action('onGoogleLogin')}
       onTwitterLogin={action('onTwitterLogin')}
     />
+  ))
+  .add('error modal', () => (
+    <LoginScreen
+      loading
+      errorModalOpen={true}
+      onErrorModalClose={action('onErrorModalClose')}
+      onGoogleLogin={action('onGoogleLogin')}
+      onTwitterLogin={action('onTwitterLogin')}
+    />
   ));
