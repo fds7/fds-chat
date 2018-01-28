@@ -20,9 +20,23 @@ const MinHeightContainer = styled(Container)`
 `;
 
 export default class RoomList extends Component {
+  static defaultProps = {
+    rooms: [],
+    loading: false,
+    hasPrev: false,
+    hasNext: false,
+    onPrevClick: () => {},
+    onNextClick: () => {},
+    onMount: () => {}
+  }
+
+  componentDidMount() {
+    this.props.onMount();
+  }
+
   render() {
     const {
-      rooms = [],
+      rooms,
       loading,
       hasPrev,
       hasNext,
@@ -42,8 +56,8 @@ export default class RoomList extends Component {
           ? <React.Fragment>
               <List divided relaxed>
                 {
-                  rooms.map(({roomId, title, createdAt, joined, itemProps = {}}) => (
-                    <List.Item {...itemProps} key={roomId}>
+                  rooms.map(({id, title, createdAt, joined, itemProps = {}}) => (
+                    <List.Item {...itemProps} key={id}>
                       <List.Icon name="send" size="large" verticalAlign="middle" color={joined && 'teal'}/>
                       <List.Content>
                         <List.Header>{title}</List.Header>

@@ -3,43 +3,34 @@ import {connect} from 'react-redux';
 
 import RoomList from '../components/RoomList';
 import withAuth from '../hocs/withAuth';
-
-/*
-hasPrev
-onPrevClick
-hasNext
-onNextClick
-rooms
-*/
-
-/*
-rooms 구조
-roomId: 1,
-title: 'Redux 스터디 모임',
-createdAt: 1517118311910,
-joined: true,
-itemProps: {
-  as: 'a',
-  href: 'https://httpbin.org/ip'
-}
-*/
+import {resetRoomsPagination, fetchNextRooms, fetchPrevRooms} from '../actions/room';
+import {Link} from 'react-router-dom';
 
 export default withAuth(connect(
-  state => {
-    return {
-      rooms: [
-        {
-          roomId: 1,
-          title: 'Redux 스터디 모임',
-          createdAt: 1517118311910,
-          joined: true,
-        },
-        {
-          roomId: 2,
-          title: 'TypeScript 스터디 모임',
-          createdAt: 1517118311910
-        },
-      ]
+  ({roomListPagination: rlp}) => ({
+    loading: rlp.loading,
+    rooms: rlp.currentRooms.map(room => {
+      return {
+        ...room,
+        itemProps: {
+          as: Link,
+          to: `/room/${room.id}`
+        }
+      }
+    }),
+    hasNext: rlp.nextRoomId != null,
+    hasPrev: rlp.prevRoomIds.length > 0
+  }),
+  dispatch => ({
+    onMount: () => {
+      dispatch(resetRoomsPagination());
+      dispatch(fetchNextRooms());
+    },
+    onNextClick: () => {
+      dispatch(fetchNextRooms());
+    },
+    onPrevClick: () => {
+      dispatch(fetchPrevRooms());
     }
-  }
+  })
 )(RoomList));
