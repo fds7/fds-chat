@@ -7,3 +7,4 @@ import './AccountScreenLayout';
 import './NickNameForm';
 import './ProfilePhotoForm';
 import './MessageList';
+import './MessageForm';
